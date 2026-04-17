@@ -1,0 +1,6 @@
+{
+  "name": "HomeCare24 Betreuungsfragebogen",
+  "description": "Vollständiger Betreuungsfragebogen als Web-App mit PDF-Export für HomeCare24.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
