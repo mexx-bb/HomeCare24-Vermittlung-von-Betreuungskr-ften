@@ -40,8 +40,21 @@ export default function App() {
     }
   };
 
-  const handleDownloadPDF = () => {
-    generatePDF(formData);
+  const handleDownloadPDF = async () => {
+    await generatePDF(formData);
+    
+    // Give the browser a moment to process the download before modifying window location
+    setTimeout(() => {
+      const subject = encodeURIComponent(`Neuer Betreuungsfragebogen: ${formData.signatureName || formData.contact_lastName}`);
+      const body = encodeURIComponent(
+        `Guten Tag,\n\n` +
+        `anbei übersende ich Ihnen meinen ausgefüllten Betreuungsfragebogen.\n\n` +
+        `[WICHTIG: Bitte ziehen Sie das soeben heruntergeladene PDF Dokument in dieses Fenster hinein als Anhang!]\n\n` +
+        `Mit freundlichen Grüßen,\n` +
+        `${formData.signatureName || formData.contact_lastName}`
+      );
+      window.location.href = `mailto:info@wiehler-homecare24.de?subject=${subject}&body=${body}`;
+    }, 800);
   };
 
   return (

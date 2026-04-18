@@ -16,7 +16,10 @@ export default function Step7({ data, update, onPrev, onDownload }: Props) {
           <CheckCircle size={32} />
         </div>
         <h2 className="text-3xl font-bold text-[#55618b]">Fast fertig!</h2>
-        <p className="text-[#4a5568] mt-2">Klicken Sie unten auf die Schaltfläche, um das vorausgefüllte Formular als PDF herunterzuladen.</p>
+        <p className="text-[#4a5568] mt-2">
+          Klicken Sie auf die Schaltfläche, um das vorausgefüllte Formular als PDF herunterzuladen.<br/>
+          <b>Danach öffnet sich automatisch Ihr E-Mail-Programm.</b> Bitte vergessen Sie nicht, das heruntergeladene PDF dort als Anhang einzufügen!
+        </p>
       </div>
 
       <div className="bg-[#f8fafc] border border-[#e2e8f0] rounded-lg p-6 mt-8 text-left">
