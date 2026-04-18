@@ -146,6 +146,16 @@ export async function generatePDF(data: FormData) {
     ["Weitere Kontaktperson", `${data.contact_otherPersonFirstName} ${data.contact_otherPersonLastName} (Tel: ${data.contact_otherPersonPhone})`]
   ]);
 
+  // Section 7: AGB & Unterschrift
+  if (data.agbAccepted) {
+    const formattedDate = data.signatureDate ? format(new Date(data.signatureDate), 'dd.MM.yyyy HH:mm') : format(new Date(), 'dd.MM.yyyy HH:mm');
+    createSection("7. Rechtlicher Hinweis & Bestätigung", [
+      ["Zustimmung", "Der/Die Unterzeichnende akzeptiert die Allgemeinen Geschäftsbedingungen (AGB) und die Datenschutzerklärung von HomeCare24."],
+      ["Digitale Unterschrift", data.signatureName],
+      ["Datum & Uhrzeit", `${formattedDate} Uhr`]
+    ]);
+  }
+
   // Add Headers, Footers, and Page Numbers at the very end
   const pageCount = doc.internal.getNumberOfPages();
   for (let i = 1; i <= pageCount; i++) {
@@ -156,14 +166,18 @@ export async function generatePDF(data: FormData) {
       try {
         const imgProps = doc.getImageProperties(logoBase64);
         const ratio = imgProps.width / imgProps.height;
-        // The original image is slightly wider than it is tall. We want the height to fit nicely in 15px.
-        // If ratio is e.g. 1.2, width will be 15 * 1.2 = 18.
         const targetHeight = 15;
         const targetWidth = targetHeight * ratio;
         doc.addImage(logoBase64, 'PNG', 14, 10, targetWidth, targetHeight, undefined, 'FAST');
       } catch (e) {
         // Fallback explicitly to 25x15 if properties retrieval fails
-        doc.addImage(logoBase64, 'PNG', 14, 10, 25, 15, undefined, 'FAST');
+        try {
+          doc.addImage(logoBase64, 'PNG', 14, 10, 25, 15, undefined, 'FAST');
+        } catch (innerE) {
+          doc.setFontSize(14);
+          doc.setTextColor(...BRAND_COLOR);
+          doc.text("HomeCare24", 14, 20);
+        }
       }
     } else {
       doc.setFontSize(14);

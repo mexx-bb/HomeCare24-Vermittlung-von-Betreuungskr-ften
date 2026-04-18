@@ -107,8 +107,12 @@ export interface FormData {
   contact_phone: string;
   contact_howFound: string;
   contact_otherPersonFirstName: string;
-  contact_otherPersonLastName: string;
   contact_otherPersonPhone: string;
+
+  // AGB & Signature
+  agbAccepted: boolean;
+  signatureName: string;
+  signatureDate: string;
 }
 
 export const initialFormData: FormData = {
@@ -134,6 +138,7 @@ export const initialFormData: FormData = {
   req_otherRequirements: "", req_weeklyBudget: "",
 
   contact_title: "", contact_firstName: "", contact_lastName: "", contact_relationship: "", contact_address: "",
-  contact_street: "", contact_city: "", contact_zipCountry: "", contact_email: "", contact_phone: "", contact_howFound: "",
   contact_otherPersonFirstName: "", contact_otherPersonLastName: "", contact_otherPersonPhone: "",
+
+  agbAccepted: false, signatureName: "", signatureDate: "",
 };
