@@ -149,7 +149,8 @@ export function generatePDF(data: FormData) {
     // Header
     try {
       doc.addImage(logoBase64, 'PNG', 14, 8, 28, 17);
-    } catch (_e) {
+    } catch (e) {
+      console.error("jsPDF addImage error:", e);
       doc.setFontSize(14);
       doc.setTextColor(...BRAND_COLOR);
       doc.text("HomeCare24", 14, 20);
