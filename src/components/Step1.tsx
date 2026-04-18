@@ -42,7 +42,10 @@ export default function Step1({ data, update, onNext }: Props) {
           label="Anzahl der zu betreuenden Personen" 
           options={["Einzelperson", "Paar"]} 
           value={data.numberOfPersons} 
-          onChange={(val: any) => update({ numberOfPersons: val })} 
+          onChange={(val: any) => update({ 
+            numberOfPersons: val,
+            hasSecondPerson: val === 'Paar' ? 'Ja' : 'Nein'
+          })} 
           required 
         />
       </div>

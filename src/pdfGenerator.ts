@@ -148,22 +148,7 @@ export function generatePDF(data: FormData) {
     
     // Header
     if (logoBase64) {
-      try {
-        const imgProps = doc.getImageProperties(logoBase64);
-        const ratio = imgProps.width / imgProps.height;
-        const targetHeight = 15;
-        const targetWidth = targetHeight * ratio;
-        doc.addImage(logoBase64, 'PNG', 14, 10, targetWidth, targetHeight, undefined, 'FAST');
-      } catch (e) {
-        // Fallback explicitly to 25x15 if properties retrieval fails
-        try {
-          doc.addImage(logoBase64, 'PNG', 14, 10, 25, 15, undefined, 'FAST');
-        } catch (innerE) {
-          doc.setFontSize(14);
-          doc.setTextColor(...BRAND_COLOR);
-          doc.text("HomeCare24", 14, 20);
-        }
-      }
+      doc.addImage(logoBase64, 'PNG', 14, 8, 28, 17);
     } else {
       doc.setFontSize(14);
       doc.setTextColor(...BRAND_COLOR);

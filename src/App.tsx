@@ -20,8 +20,8 @@ export default function App() {
 
   const nextStep = () => {
     if (currentStep < totalSteps) {
-      if (currentStep === 2 && formData.hasSecondPerson === 'Nein') {
-        setCurrentStep(4); // Skip step 3 if no second person
+      if (currentStep === 2 && formData.numberOfPersons !== 'Paar') {
+        setCurrentStep(4); // Skip step 3 if not a couple
       } else {
         setCurrentStep(currentStep + 1);
       }
@@ -31,7 +31,7 @@ export default function App() {
 
   const prevStep = () => {
     if (currentStep > 1) {
-      if (currentStep === 4 && formData.hasSecondPerson === 'Nein') {
+      if (currentStep === 4 && formData.numberOfPersons !== 'Paar') {
         setCurrentStep(2);
       } else {
         setCurrentStep(currentStep - 1);
@@ -43,7 +43,7 @@ export default function App() {
   const handleDownloadPDF = () => {
     generatePDF(formData);
     
-    // Trigger mailto immediately so browser popup blockers don't intercept it
+    // Open mailto in a new window so it doesn't navigate away from the page
     const subject = encodeURIComponent(`Neuer Betreuungsfragebogen: ${formData.signatureName || formData.contact_lastName}`);
     const body = encodeURIComponent(
       `Guten Tag,\n\n` +
@@ -52,7 +52,7 @@ export default function App() {
       `Mit freundlichen Grüßen,\n` +
       `${formData.signatureName || formData.contact_lastName}`
     );
-    window.location.href = `mailto:info@wiehler-homecare24.de?subject=${subject}&body=${body}`;
+    window.open(`mailto:info@wiehler-homecare24.de?subject=${subject}&body=${body}`);
   };
 
   return (
