@@ -11,7 +11,7 @@ export async function generatePDF(data: FormData) {
 
   try {
     // Fetch local downloaded logo to avoid CORS
-    const response = await fetch('/logo.png');
+    const response = await fetch(`${import.meta.env.BASE_URL}logo.png`);
     if (response.ok) {
       const blob = await response.blob();
       logoBase64 = await new Promise<string>((resolve) => {
