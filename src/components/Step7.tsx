@@ -23,7 +23,7 @@ export default function Step7({ data, update, onPrev, onDownload }: Props) {
         <h3 className="font-bold text-[#55618b] mb-4 text-lg">Rechtlicher Hinweis & Bestätigung</h3>
         <p className="text-sm text-[#4a5568] mb-4">
           Mit dem Bestätigen dieser Checkbox und der Eingabe Ihres Namens bestätigen Sie die Richtigkeit Ihrer Angaben und akzeptieren unsere 
-          <a href="https://wiehler-homecare24.de/datenschutzerklaerung/" target="_blank" rel="noreferrer" className="text-[#55618b] underline ml-1 hover:text-[#3c4564]">Datenschutzbestimmungen</a> und 
+          <a href="https://wiehler-homecare24.de/datenschutz/" target="_blank" rel="noreferrer" className="text-[#55618b] underline ml-1 hover:text-[#3c4564]">Datenschutzbestimmungen</a> und 
           <a href="https://wiehler-homecare24.de/agb/" target="_blank" rel="noreferrer" className="text-[#55618b] underline ml-1 hover:text-[#3c4564]">AGB</a>.
         </p>
         
