@@ -147,9 +147,9 @@ export function generatePDF(data: FormData) {
     doc.setPage(i);
     
     // Header
-    if (logoBase64) {
+    try {
       doc.addImage(logoBase64, 'PNG', 14, 8, 28, 17);
-    } else {
+    } catch (_e) {
       doc.setFontSize(14);
       doc.setTextColor(...BRAND_COLOR);
       doc.text("HomeCare24", 14, 20);
