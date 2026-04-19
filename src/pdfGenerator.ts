@@ -2,32 +2,14 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { FormData } from './types';
 import { format } from 'date-fns';
+import logoDataUrl from './assets/logo.png?inline';
 
 const BRAND_COLOR = [85, 97, 139] as [number, number, number];
-const LOGO_URL = "https://wiehler-homecare24.de/wp-content/uploads/yootheme/cache/cc/LOGO-HOMECARE-ccdfb350.png";
-
-// Helper to fetch image and convert to Base64
-async function getBase64ImageFromUrl(url: string): Promise<string> {
-  const res = await fetch(url);
-  const blob = await res.blob();
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onloadend = () => resolve(reader.result as string);
-    reader.onerror = reject;
-    reader.readAsDataURL(blob);
-  });
-}
 
 export async function generatePDF(data: FormData) {
   const doc = new jsPDF();
-  
-  // Try to pre-load logo
-  let fetchedLogo: string | null = null;
-  try {
-    fetchedLogo = await getBase64ImageFromUrl(LOGO_URL);
-  } catch (e) {
-    console.error("Could not fetch logo from URL, using text fallback:", e);
-  }
+
+  const fetchedLogo: string = logoDataUrl;
 
   const pageWidth = doc.internal.pageSize.getWidth();
   const pageHeight = doc.internal.pageSize.getHeight();
