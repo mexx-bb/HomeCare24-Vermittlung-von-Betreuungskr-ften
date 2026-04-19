@@ -40,8 +40,8 @@ export default function App() {
     }
   };
 
-  const handleDownloadPDF = () => {
-    generatePDF(formData);
+  const handleDownloadPDF = async () => {
+    await generatePDF(formData);
     
     // Open mailto in a new window so it doesn't navigate away from the page
     const subject = encodeURIComponent(`Neuer Betreuungsfragebogen: ${formData.signatureName || formData.contact_lastName}`);
